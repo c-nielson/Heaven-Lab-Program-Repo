@@ -14,6 +14,7 @@
     <RootNamespace>2D Analyzer</RootNamespace>
     <InterpreterId>CondaEnv|CondaEnv|Heaven_Lab</InterpreterId>
     <IsWindowsApplication>False</IsWindowsApplication>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="2D Grapher.ipynb" />
+    <Content Include="environment.yml" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
