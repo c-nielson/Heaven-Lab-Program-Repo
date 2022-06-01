@@ -5,7 +5,7 @@ import os
 from tkinter import filedialog
 from xml.etree import ElementTree as et
 import numpy as np
-from scipy.signal import find_peaks
+from scipy.signal import find_peaks, medfilt
 
 # Convert nm to cm-1 or vice versa
 def nm_cm(to_convert):
@@ -46,18 +46,44 @@ def get_center(scan_start, offset):
 	return nm_cm(scan_start - offset)
 
 # Reads the data in the given file and calculates axes based on steps and fluor_steps; returns transposed data as ndarray
-def get_data_transposed(data_file):
-	data = np.genfromtxt(data_file)
-	return data.transpose()
-
-# Returns average of DF data within given range. Assumes data is transposed!
-def LIF_slice(data, DF_pts, min, max):
-	return data[np.where((DF_pts >= min) & (DF_pts <= max)), :].mean(axis=1).flatten()
-	
-# Returns average of LIF data within given range. Assumes data is transposed!
-def DF_slice(data, LIF_pts, min, max):
-	return data[:, np.where((LIF_pts >= min) & (LIF_pts <= max))].mean(axis=2).flatten()
+def read_data(data_file):
+	data_transposed = np.genfromtxt(data_file).transpose()
+	return data_transposed, medfilt(data_transposed)
 
 # Return peaks of given data
-def get_peaks(data, _prominence):
-	return find_peaks(data, prominence=_prominence)
+def get_peaks(data, _prominence, _width=None):
+	return find_peaks(data, prominence=_prominence, width=_width)
+
+# Returns average of DF data within given range. If no range given, returns average of all data (useful for finding all peaks). Assumes data is transposed!
+def LIF_slice(data, DF_pts, min=None, max=None):
+	if (min != None) & (max != None):
+		return data[np.where((DF_pts >= min) & (DF_pts <= max)), :].mean(axis=1).flatten()
+	elif (min == None) & (max == None):
+		return data[:, :].mean(axis=0).flatten()
+	else:
+		return None	
+	
+# Returns average of LIF data within given range. Assumes data is transposed!
+def DF_slice(data, LIF_pts, min=None, max=None):
+	if (min != None) & (max != None):
+		return data[:, np.where((LIF_pts >= min) & (LIF_pts <= max))].mean(axis=2).flatten()
+	elif (min == None) & (max == None):
+		return data[:, :].mean(axis=1).flatten()
+	else:
+		return None
+
+## Returns average of LIF data at given wavelength and surrounding area. Assumes data is transposed!
+#def DF_slice(data, LIF_pts, wavelength):
+#	return data[:, np.where((LIF_pts >= (min-2.0)) & (LIF_pts <= (max+2.0)))].mean(axis=2).flatten()
+
+def auto_slice(data, DF_pts, LIF_pts, DF_prominence=500, LIF_prominence=300):
+	DF_peaks, DF_properties = get_peaks(DF_slice(data, LIF_pts), DF_prominence, 0.2)
+	LIF_slices = []
+	for i in range(0, DF_peaks.size):
+		# Note in the line below, minimum is "+" width, maximum is "-" width; higher numbers are higher energy, i.e. smaller wavelength, and the DF_pts are organized small to large wavelength, i.e. high to low energy!
+		DF_min = DF_pts[int(round(DF_peaks[i]+DF_properties["widths"][i]/2, 0))]
+		DF_max = DF_pts[int(round(DF_peaks[i]-DF_properties["widths"][i]/2, 0))]
+		_LIF_slice = LIF_slice(data, DF_pts, DF_min, DF_max)
+		peaks = get_peaks(_LIF_slice, LIF_prominence)
+		LIF_slices.append((DF_peaks[i], _LIF_slice, peaks[0]))
+	return LIF_slices
