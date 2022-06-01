@@ -17,12 +17,12 @@ rots_per_minute = rots_per_second * 60
 steps_per_shot = 1/(16*20)
 
 timeout = 0
-target_rpm_scale = 850
+target_rpm_scale = 1000
 target_sps_scale = target_rpm_scale / rots_per_minute * steps_per_shot
 
 target = target_sps_scale
 current = 0.8
-velocity = 1/13
+velocity = 1/10
 
 pos_threshold = 0.05
 
