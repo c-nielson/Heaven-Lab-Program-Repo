@@ -23,11 +23,11 @@ def get_tree(xml_file):
 
 # Saves an image of the given data with the given data_file path, replacing the extension with .jpg
 def save_image(data, scan_start, scan_stop, fluor_min, fluor_max, data_file):
-	ax = show_graph(data, scan_start, scan_stop, fluor_min, fluor_max)
-	plt.draw()
+	ax = plt.imshow(data, extent=[scan_start, scan_stop, fluor_min, fluor_max], aspect='auto', cmap='viridis', interpolation='gaussian', vmax=abs(data.max()))
+	plt.ylabel(r"Dispersed Fluorescence ($nm$)")
+	plt.xlabel(r"LIF ($cm^{-1}$)")
 	image_file = os.path.splitext(data_file)[0] + ".jpg"
 	plt.savefig(image_file, dpi=1200)
-	return image_file
 
 # Displays a heatmap graph of the given data
 def show_graph(data, scan_start, scan_stop, fluor_min, fluor_max):
