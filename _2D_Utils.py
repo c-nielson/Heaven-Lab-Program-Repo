@@ -73,14 +73,14 @@ def DF_slice(data, LIF_pts, min=None, max=None):
 		return None
 
 # Returns list of all dispersed fluorscence peaks and their corresponding LIF slices
-def auto_slice(data, DF_pts, LIF_pts, DF_prominence=500, LIF_prominence=300):
-	DF_peaks, DF_properties = get_peaks(DF_slice(data, LIF_pts), DF_prominence, 10)
+def auto_slice(data, DF_pts, LIF_pts, DF_prominence=100, LIF_prominence=50, DF_width=25, LIF_width=5):
+	DF_peaks, DF_properties = get_peaks(DF_slice(data, LIF_pts), DF_prominence, DF_width)
 	LIF_slices = []
 	for i in range(0, DF_peaks.size):
 		# Note in the line below, minimum is "+" width, maximum is "-" width; higher numbers are higher energy, i.e. smaller wavelength, and the DF_pts are organized small to large wavelength, i.e. high to low energy!
 		DF_min = DF_pts[int(round(DF_peaks[i]+DF_properties["widths"][i]/2, 0))]
 		DF_max = DF_pts[int(round(DF_peaks[i]-DF_properties["widths"][i]/2, 0))]
 		_LIF_slice = LIF_slice(data, DF_pts, DF_min, DF_max)
-		peaks = get_peaks(_LIF_slice, LIF_prominence)
+		peaks = get_peaks(_LIF_slice, LIF_prominence, LIF_width)
 		LIF_slices.append((DF_peaks[i], _LIF_slice, peaks, DF_properties["widths"][i]))
 	return LIF_slices
