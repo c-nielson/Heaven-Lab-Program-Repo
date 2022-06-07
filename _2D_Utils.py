@@ -72,10 +72,7 @@ def DF_slice(data, LIF_pts, min=None, max=None):
 	else:
 		return None
 
-## Returns average of LIF data at given wavelength and surrounding area. Assumes data is transposed!
-#def DF_slice(data, LIF_pts, wavelength):
-#	return data[:, np.where((LIF_pts >= (min-2.0)) & (LIF_pts <= (max+2.0)))].mean(axis=2).flatten()
-
+# Returns list of all dispersed fluorscence peaks and their corresponding LIF slices
 def auto_slice(data, DF_pts, LIF_pts, DF_prominence=500, LIF_prominence=300):
 	DF_peaks, DF_properties = get_peaks(DF_slice(data, LIF_pts), DF_prominence, 0.2)
 	LIF_slices = []
