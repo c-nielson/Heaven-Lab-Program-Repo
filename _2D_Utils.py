@@ -82,5 +82,5 @@ def auto_slice(data, DF_pts, LIF_pts, DF_prominence=500, LIF_prominence=300):
 		DF_max = DF_pts[int(round(DF_peaks[i]-DF_properties["widths"][i]/2, 0))]
 		_LIF_slice = LIF_slice(data, DF_pts, DF_min, DF_max)
 		peaks = get_peaks(_LIF_slice, LIF_prominence)
-		LIF_slices.append((DF_peaks[i], _LIF_slice, peaks[0]))
+		LIF_slices.append((DF_peaks[i], _LIF_slice, peaks))
 	return LIF_slices
