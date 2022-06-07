@@ -51,7 +51,7 @@ def read_data(data_file):
 	return data_transposed, medfilt(data_transposed)
 
 # Return peaks of given data
-def get_peaks(data, _prominence, _width=None):
+def get_peaks(data, _prominence=50, _width=10):
 	return find_peaks(data, prominence=_prominence, width=_width)
 
 # Returns average of DF data within given range. If no range given, returns average of all data (useful for finding all peaks). Assumes data is transposed!
