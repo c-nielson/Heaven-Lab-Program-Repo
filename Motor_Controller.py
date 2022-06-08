@@ -1,4 +1,4 @@
-# Nema17
+# Nema17 information
 # 200 steps per rotation
 # 1.8 degrees per steps
 # 1.2A/phase
@@ -13,18 +13,18 @@ import time
 steps_per_rotation = 200 # Number of rotations per step for the Nema17
 
 rots_per_second = 1/16/steps_per_rotation # The 1/16 facter is because the default Phidget scale factor is in 1/16 step per second
-rots_per_minute = rots_per_second * 60
-steps_per_shot = 1/(16*20)
+rots_per_minute = rots_per_second * 60 # Scalling factor for rotations per minute
+steps_per_shot = 1/(16*20) # Scaling factor for steps per shot, i.e. how many (full) steps the motor will take for every shot, assuming the system is running at 20Hz
 
-timeout = 0
-target_rpm_scale = 1000
-target_sps_scale = target_rpm_scale / rots_per_minute * steps_per_shot
+timeout = 0 # Wait for motor to connect; 0 is infinite limit on waiting
+target_rpm_scale = 1000 # Limit on how for back the rod should go, scaled in rpm
+target_sps_scale = target_rpm_scale / rots_per_minute * steps_per_shot # Same as above, but scaled to steps per shot
 
-target = target_sps_scale
-current = 0.8
-velocity = 1/10
+target = target_sps_scale # Set target
+current = 0.8 # Limit current
+velocity = 1/10 # Velocity to run motor at; with scale set to steps per shot, this would take 1 step every half second
 
-pos_threshold = 0.05
+pos_threshold = 0.05 # small factor to allow for motor going slightly past the home or limit position
 
 RUN = True
 
@@ -67,7 +67,7 @@ def go_home(ch):
 	ch.setRescaleFactor(tmp)
 	print('Motor parked in home position!\n')
 
-def main():
+def main(): #TODO: add code to randomize the starting position of the motor on startup; will minimize channeling in the rod
 	# Create and attach to Stepper
 	ch = Stepper()
 	ch.openWaitForAttachment(timeout)
@@ -113,6 +113,8 @@ def main():
 					print('That is not a command!\n')
 					continue
 			
+			#NOTE: The below code is here for versions of Python < 3.10; 3.10 implemented the match case structure above. The following lines are functionally the same
+
 			#elif (command == 'p') or (command == 'pause'):
 			#	pause(ch)
 			#elif (command == 'r') or (command == 'resume') or (command == 'run'):

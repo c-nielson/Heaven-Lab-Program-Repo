@@ -1,3 +1,5 @@
+# NOTE: This file is not currently in use! It is a script version of the Notebook "2D Grapher.ipynb"
+
 import pandas as pd
 import numpy as np
 import _2D_Utils

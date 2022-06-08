@@ -36,6 +36,7 @@
     <Content Include="2D Grapher.ipynb" />
     <Content Include="environment.yml" />
     <Content Include="requirements.txt" />
+    <Content Include="Startup.bat" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
