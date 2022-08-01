@@ -134,15 +134,17 @@ def main():  # TODO: add code to randomize the starting position of the motor on
 
 			# NOTE The below code is for versions of Python < 3.10; 3.10 implemented the match case structure above. The following lines are
 			# functionally the same
-
-			# elif (command == 'p') or (command == 'pause'):
-			#	pause(ch)  # elif (command == 'r') or (command == 'resume') or (command == 'run'):
-			#	run(ch)  # elif (command == 'q') or (command == 'quit'):
-			#	go_home(ch)
-			#	print('\nClosing program...')
-			#	break  # else:
-			#	print('That is not a command!')
-			#	continue
+				# if (command == 'p') or (command == 'pause'):
+					# pause(ch)  
+				# elif (command == 'r') or (command == 'resume') or (command == 'run'):
+					# run(ch)
+				# elif (command == 'q') or (command == 'quit'):
+					# go_home(ch)
+					# print('\nClosing program...')
+					# break
+				# else:
+					# print('That is not a command!')
+					# continue
 
 			# Interrupt will move the motor back to the zero position and close Phidget tools before exiting
 			except KeyboardInterrupt:
