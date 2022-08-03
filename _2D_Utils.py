@@ -39,7 +39,7 @@ def show_graph(data, scan_start, scan_stop, fluor_min, fluor_max):
 
 # Returns parameters of scan, assuming xml file was generated using the 2DLIF program; returns in order: scan_start, scan_stop, scan_step, nsteps, offset
 def get_params(xml_root):
-	return float(xml_root[2][2][1].text), float(xml_root[2][4][1].text), float(xml_root[2][3][1].text), int(xml_root[2][5][1].text), float(xml_root[3][2][1].text)
+	return float(xml_root[2][2][1].text), float(xml_root[2][3][1].text), float(xml_root[2][4][1].text), int(xml_root[2][7][1].text), float(xml_root[3][2][1].text)
 	
 # Calculates the center of the y-axis based on the start position of the scan and the monochromator offset
 def get_center(scan_start, offset):

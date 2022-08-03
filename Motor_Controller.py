@@ -78,7 +78,7 @@ def go_home(ch):
 def main():  # TODO: add code to randomize the starting position of the motor on startup; will minimize channeling in the rod
 	# List options for commands
 	print(
-		'''The following commands are available:\n
+		'''\nThe following commands are available:\n
 	\t"r" OR "run" OR "resume":\tBegin motor rotation.\n
 	\t"p" OR "pause":\t\t\tPause motor rotation; keeps motor engaged.\n
 	\t"q" OR "quit":\t\t\tPositions motor in home position and disengages, exiting the program.\n
