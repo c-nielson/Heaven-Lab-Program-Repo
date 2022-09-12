@@ -365,3 +365,6 @@ FodyWeavers.xsd
 
 # PyCharm settings
 .idea/
+
+# Manually added
+*.csv
