@@ -368,3 +368,6 @@ FodyWeavers.xsd
 
 # Manually added
 *.csv
+.ipynb_checkpoints
+**/*.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
