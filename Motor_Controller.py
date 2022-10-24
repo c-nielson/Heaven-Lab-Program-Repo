@@ -42,8 +42,8 @@ def pause(ch):
 
 # Resume motor motion
 def run(ch):
-	# if ch.getIsMoving(): # Return if motor is already moving
-	# return
+	# Set velocity limit
+	ch.setVelocityLimit(velocity)
 	RUN = True
 	ch.setEngaged(True)
 	print('Motor running!\n')
@@ -97,9 +97,6 @@ def main():  # TODO: add code to randomize the starting position of the motor on
 
 		# Set current limit
 		ch.setCurrentLimit(current)
-
-		# Set velocity limit
-		ch.setVelocityLimit(velocity)
 
 		# Set PositionChangedHandler
 		ch.setOnPositionChangeHandler(onPositionChange)
