@@ -20,12 +20,12 @@ steps_per_shot = 1 / (
 		16 * 20)  # Scaling factor for steps per shot, i.e. how many (full) steps the motor will take for every shot, assuming the system is running at 20Hz
 
 timeout = 0  # Wait for motor to connect; 0 is infinite limit on waiting
-target_rpm_scale = 1000  # Limit on how for back the rod should go, scaled in rpm
+target_rpm_scale = 1500  # Limit on how for back the rod should go, scaled in rpm
 target_sps_scale = target_rpm_scale / rots_per_minute * steps_per_shot  # Same as above, but scaled to steps per shot
 
 target = target_sps_scale  # Set target
 current = 0.8  # Limit current
-velocity = 1 / 10  # Velocity to run motor at; with scale set to steps per shot, this would take 1 step every half second
+velocity = 1 / 10  # Velocity to run motor at; with scale set to steps per shot, 1/10 would take 1 (full) step every half second
 
 pos_threshold = 0.05  # small factor to allow for motor going slightly past the home or limit position
 
