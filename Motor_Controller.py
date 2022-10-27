@@ -79,11 +79,11 @@ def main():  # TODO: add code to randomize the starting position of the motor on
 	# List options for commands
 	print(
 		'''\nThe following commands are available:\n
-	\t"r" OR "run" OR "resume":\tBegin motor rotation.\n
-	\t"p" OR "pause":\t\t\tPause motor rotation; keeps motor engaged.\n
-	\t"q" OR "quit":\t\t\tPositions motor in home position and disengages, exiting the program.\n
-	\tKeyboard Interrupt:\t\tSame as "quit".
-	'''
+		\t"r" OR "run" OR "resume":\tBegin motor rotation.\n
+		\t"p" OR "pause":\t\t\tPause motor rotation; keeps motor engaged.\n
+		\t"q" OR "quit":\t\t\tPositions motor in home position and disengages, exiting the program.\n
+		\tKeyboard Interrupt:\t\tSame as "quit".
+		'''
 	)
 
 	try:
